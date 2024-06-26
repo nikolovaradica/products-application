@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  products_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: products_app
+    depends_on:
+      - products_db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://products_db:5432/products
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+
+  products_db:
+    image: postgres:latest
+    container_name: products_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=products
+    ports:
+      - "5432:5432"
