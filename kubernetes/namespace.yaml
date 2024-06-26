@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: products-namespace
+  labels:
+    name: products-namespace
